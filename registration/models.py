@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.db import models
 
 # Create your models here.
@@ -134,7 +135,7 @@ class Course(models.Model):
         if self.approved:
             old_status = Course.objects.get(pk=self.course_id)
             if old_status.approved == False and self.approved == True:
-                send_mail('emails/course_approved.html', {'user': self.course_user, 'course': self.course_name},
+                        send_mail('emails/course_approved.html', {'user': self.course_user, 'course': self.course_name},
                           'admin@thinkfoss.com', [self.course_user.email, 'admin@thinkfoss.com'])
         super(Course, self).save()
 
