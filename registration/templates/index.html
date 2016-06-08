@@ -1,112 +1,152 @@
+{% load staticfiles %}
+<html xmlns="http://www.w3.org/1999/html">
+
+<title> he he he </title>
 <head>
-    {% load staticfiles %}
+
+<link rel="stylesheet" href="{%  static 'css/bootstrap.min.css' %}" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<link rel="stylesheet" href="{%  static 'css/bootstrap.min.css' %}"integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
+    <script src="{%  static 'js/jquery-1.12.4.min.js' %}"></script>
+
+<script src="{%  static 'js/bootstrap.min.js' %}"></script>
+
+
+
 </head>
-
-<title>my workshop website</title>
-
-<head>
-    <title>Bootstrap Case</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Webber</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-
-
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Join<span
-                    class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="{% url 'register_user' %}">sign up</a></li>
-                    <li><a href="#">sign in</a></li>
-                </ul>
-            </li>
-
-            <ul class="nav navbar-nav navbar-nav navbar- nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Help</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </ul>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Join<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Sign Up</a></li>
+            <li><a href="#">Sign in</a></li>
+            <li><a href="#">More...</a></li>
+
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Join <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+             {% if request.user.is_anonymous %}
+                 <li><a href="{%  url 'register_user'%}">SIGN UP</a></li>
+                 <li><a href="{% url 'login' %}">SIGN IN</a></li>
+             {% else %}
+               <li>
+                           <div class="btn-group">
+                               <li><a href="{% url 'logout' %}">logout</a></li>
+                                <li><a href="{% url 'user_profile_update' %}">Edit Profile</a></li>
+
+                               <a class="btn-new btn-nav btn-white" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i>
+                                   {% if request.user.user_first_name %}
+                                   {{ request.user.user_first_name }}
+                                   {% elif request.user.username %}
+                                   {{ request.user.username }}
+                                   {% else %}
+                                   {{ request.user.email }}
+                                   {% endif %}
+                                   {% endif %}
+
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
 
-
-<div class="container">
-</div>
-<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"
-      integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}"
-      integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-</head>
-
-<body style="background-color:lightgrey">
-<div class="row"/>
-<div class="col-md-6 col-md-offset-3"/>
-<div class="panel panel-primary"/>
-<div class="panel-heading"><b>Sign In</b></div>
-<div class="panel-body"/>
+<div class="col-md-8 col-md-offset-2 well">
 
 
-<legend>Registration</legend>
-<table>
-
-    <div>
-        <tr>
-            <th id="1"><label for="name">name</label></th>
-            <td><input type="text" name="a"/></td>
-        </tr>
-    </div>
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
     <tr>
-        <div>
-            <th id="2"><label for="add">Old Email-address(if any)</label></th>
-            <td><input type="text" name="b"/></td>
-        </div>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Manufacturer
+        </th>
+        <th>
+            Price
+        </th>
+           <th>
+            More
+        </th>
     </tr>
-    </div>
-    <div>
+    </thead>
+    <tbody>
+    {% for item in object_list %}
         <tr>
-            <th id="2"><label for="add">new-Email id</label></th>
-            <td><input type="text" name="c"/></td>
+            <td> {{ item.name }} </td>
+            <td> {{ item.description }}</td>
+            <td> {{ item.manufacturer }}</td>
+            <td> {{ item.price }}</td>
+            <td> <a href="{% url 'chocolate_info' item.id %}">Info</a> </td>
         </tr>
-    </div>
-    <div>
-        <tr>
-            <th id="2"><label for="add">Password</label></th>
-            <td><input type="text" name="c"/></td>
-        </tr>
-    </div>
-    <div>
-        <tr>
-            <th><label for="n">gender</label></th>
-            <td><input type="radio" id="y" value="yes" name="option"/>
-                <label for="y">male</label>
-                <input type="radio" id="n" value="no" name="option"/>
-                <label for="y">female</label></td>
-        </tr>
-
-        <tr>
-            <th id=4">feedback on this site</th>
-            <td><textarea rows="4" cols="30"></textarea></td>
-        </tr>
-        <tr>
-        <tr>
-            <td><input type="submit" value="submit"></td>
-            <td><input type="reset" value="reset"></td>
-        </tr>
-    </div>
-
-
+    {% endfor %}
+    </tbody>
 </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{%  if user.is_anonymous %}
+Nothing Here
+{% else %}
+ <div class="col-md-6 col-md-offset-5">
+        <a href="{% url 'add_chocolates' %}">
+              <button type="submit" class="btn btn-default">Add Chocolate</button>
+        </a>
+        </div>
+
+{% endif %}
+
+<div class="col-md-6 col-md-offset-5">
+        <a href="{% url 'home' %}">
+              <button type="submit" class="btn btn-default">Home</button>
+        </a>
+        </div>
+
+
 </body>
+
+</html>
